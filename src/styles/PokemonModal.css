@@ -546,18 +546,38 @@
         top: 12px;
         right: 12px;
     }
+         .modal-content {
+             max-width: 100%;
+             margin: 5px;
+             border-radius: 16px;
+             max-height: 99vh;
+         }
+    
+         .modal-header {
+             padding: 20px 16px 12px;
+         }
+    
+         .modal-body {
+             padding: 16px;
+         }
 }
 
 /* Pantallas de móviles pequeños) */
 @media (max-width: 375px) {
-    .modal-header {
-        padding: 16px 12px 10px;
-    }
+ .modal-content {
+     max-width: 100%;
+     margin: 5px;
+     border-radius: 16px;
+     max-height: 99vh;
+ }
 
-    .modal-body {
-        padding: 12px;
-    }
+ .modal-header {
+     padding: 20px 16px 12px;
+ }
 
+ .modal-body {
+     padding: 16px;
+ }
     .pokemon-name {
         font-size: 1.4rem;
     }
