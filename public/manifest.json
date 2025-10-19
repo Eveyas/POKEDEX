@@ -1,6 +1,7 @@
 {
   "short_name": "PokéPWA",
-  "name": "PokéPWA",
+  "name": "PokéPWA en línea",
+  "description": "Una aplicación web progresiva de Pokémon que funciona sin conexión",
   "icons": [
     {
       "src": "favicon.ico",
