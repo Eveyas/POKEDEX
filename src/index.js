@@ -4,12 +4,14 @@ import './index.css';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
+// Crear el root del componente principal
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
 );
 
-// Registrar el service worker (modo offline)
+// Registrar el Service Worker para habilitar PWA (modo offline)
 serviceWorkerRegistration.register();

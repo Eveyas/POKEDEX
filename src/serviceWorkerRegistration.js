@@ -1,70 +1,39 @@
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
-    window.location.hostname === '[::1]' ||
-    window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/)
+  window.location.hostname === '[::1]' ||
+  window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/)
 );
 
-export function register(config) {
-  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
-    const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
-    if (publicUrl.origin !== window.location.origin) {
-      return;
-    }
+export function register() {
+  if ('serviceWorker' in navigator) {
+    const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
 
     window.addEventListener('load', () => {
-      const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
-
       if (isLocalhost) {
-        checkValidServiceWorker(swUrl, config);
+        checkValidServiceWorker(swUrl);
         navigator.serviceWorker.ready.then(() => {
-          console.log(
-            'Alicación web ejecutada por service worker'
-          );
+          console.log('App is being served cache-first by a service worker.');
         });
       } else {
-        registerValidSW(swUrl, config);
+        registerValidSW(swUrl);
       }
     });
   }
 }
 
-function registerValidSW(swUrl, config) {
+function registerValidSW(swUrl) {
   navigator.serviceWorker
     .register(swUrl)
     .then((registration) => {
-      registration.onupdatefound = () => {
-        const installingWorker = registration.installing;
-        if (installingWorker == null) {
-          return;
-        }
-        installingWorker.onstatechange = () => {
-          if (installingWorker.state === 'installed') {
-            if (navigator.serviceWorker.controller) {
-              console.log('Actualizar nuevo contenido disponible');
-
-              if (config && config.onUpdate) {
-                config.onUpdate(registration);
-              }
-            } else {
-              console.log('El contenido está cacheado para uso offline');
-
-              if (config && config.onSuccess) {
-                config.onSuccess(registration);
-              }
-            }
-          }
-        };
-      };
+      console.log('Service Worker registrado correctamente:', registration);
     })
     .catch((error) => {
-      console.error('Error durante el registro del service worker:', error);
+      console.error('Error durante el registro del Service Worker:', error);
     });
 }
 
-function checkValidServiceWorker(swUrl, config) {
-  fetch(swUrl, {
-    headers: { 'Service-Worker': 'script' },
-  })
+function checkValidServiceWorker(swUrl) {
+  fetch(swUrl)
     .then((response) => {
       const contentType = response.headers.get('content-type');
       if (
@@ -77,22 +46,18 @@ function checkValidServiceWorker(swUrl, config) {
           });
         });
       } else {
-        registerValidSW(swUrl, config);
+        registerValidSW(swUrl);
       }
     })
     .catch(() => {
-      console.log('Aplicación ejecutada modo offline');
+      console.log('No hay conexión. La app está en modo offline.');
     });
 }
 
 export function unregister() {
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.ready
-      .then((registration) => {
-        registration.unregister();
-      })
-      .catch((error) => {
-        console.error(error.message);
-      });
+    navigator.serviceWorker.ready.then((registration) => {
+      registration.unregister();
+    });
   }
 }
