@@ -91,7 +91,7 @@ const PokemonModal = ({ pokemon, onClose }) => {
             <h2 className="pokemon-name" style={{ color: primaryColor }}>
               {pokemon.name}
             </h2>
-            <span className="pokemon-id">#{pokemon.id.toString().padStart(3, '0')}</span>
+            <span className="pokemon-id">N° {pokemon.id.toString().padStart(3, '0')}</span>
           </div>
           <div className="pokemon-types">
             {pokemon.types.map(typeInfo => (
