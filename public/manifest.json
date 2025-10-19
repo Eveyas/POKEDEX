@@ -3,18 +3,27 @@
   "name": "PokéPWA",
   "icons": [
     {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
       "src": "pokeball-192.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any maskable"
     },
     {
       "src": "pokeball-512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any maskable"
     }
   ],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#ff6b6b",
-  "background_color": "#764ba2"
+  "background_color": "#764ba2",
+  "orientation": "portrait-primary",
+  "categories": ["entertainment", "games"]
 }
