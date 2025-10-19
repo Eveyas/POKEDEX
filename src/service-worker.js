@@ -1,10 +1,31 @@
 /* eslint-disable no-restricted-globals */
 import { precacheAndRoute } from 'workbox-precaching';
+import { registerRoute } from 'workbox-routing';
+import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies';
 
-// Cachea todos los assets generados por el build
+// Cachea los archivos del build
 precacheAndRoute(self.__WB_MANIFEST);
 
-// Respuesta en caché cuando no hay conexión
+// Cache para sprites de Pokémon
+registerRoute(
+  ({ request, url }) =>
+    request.destination === 'image' && url.origin.includes('pokeapi.co'),
+  new CacheFirst({
+    cacheName: 'pokemon-sprites',
+    plugins: [
+    ],
+  })
+);
+
+// Cache para otras imágenes o recursos estáticos externos
+registerRoute(
+  ({ request }) => request.destination === 'image',
+  new StaleWhileRevalidate({
+    cacheName: 'external-images',
+  })
+);
+
+// Respuesta fallback
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
@@ -12,4 +33,3 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
-
