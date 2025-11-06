@@ -7,7 +7,7 @@ const SearchBar = ({ onSearch }) => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const inputRef = useRef(null);
 
-  // Lista de sugerencias
+  // Lista de sugerencias en el buscador
   const popularPokemon = [
     'pikachu', 'charizard', 'bulbasaur', 'squirtle', 'charmander',
     'eevee', 'mewtwo', 'lucario', 'gengar', 'dragonite',
